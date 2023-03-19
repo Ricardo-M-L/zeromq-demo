@@ -1,4 +1,4 @@
-package demo.config;
+package demo.direct.constant;
 
 /**
  * rabbitmq中用到的一些常量名称
@@ -7,6 +7,8 @@ package demo.config;
 public interface RabbitmqConstant {
 
     String DirectExchange = "DirectExchange";
+
+    String LonelyDirectExchange = "LonelyDirectExchange";
 
     String DirectQueue = "DirectQueue";
 

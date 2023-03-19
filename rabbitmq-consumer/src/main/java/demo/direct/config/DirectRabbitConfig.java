@@ -1,4 +1,4 @@
-package demo.config;
+package demo.direct.config;
 
 
 import org.springframework.amqp.core.Binding;
@@ -7,6 +7,7 @@ import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import static demo.direct.constant.RabbitmqConstant.*;
 
 /**
  * 消费者单纯的使用，其实可以不用添加这个配置，直接建后面的监听就好，
@@ -17,14 +18,14 @@ import org.springframework.context.annotation.Configuration;
 public class DirectRabbitConfig {
 
     @Bean
-    org.springframework.amqp.core.DirectExchange DirectExchange() {
+    DirectExchange DirectExchange() {
         //  return new DirectExchange("TestDirectExchange",true,true);
-        return new DirectExchange("DirectExchange",true,false); //Direct交换机 起名：DirectExchange
+        return new DirectExchange(DirectExchange,true,false); //Direct交换机 起名：DirectExchange
     }
 
     @Bean
     DirectExchange lonelyDirectExchange() {
-        return new DirectExchange("lonelyDirectExchange");
+        return new DirectExchange(LonelyDirectExchange);
     }
 
     @Bean
@@ -35,12 +36,12 @@ public class DirectRabbitConfig {
         //   return new Queue("TestDirectQueue",true,true,false);
  
         //一般设置一下队列的持久化就好,其余两个就是默认false
-        return new Queue("DirectQueue",true);  //队列 起名：DirectQueue
+        return new Queue(DirectQueue,true);  //队列 起名：DirectQueue
     }
  
     //绑定  将队列和交换机绑定, 并设置用于匹配键：DirectRouting
     @Bean
     Binding bindingDirect() {
-        return BindingBuilder.bind(DirectQueue()).to(DirectExchange()).with("DirectRouting");
+        return BindingBuilder.bind(DirectQueue()).to(DirectExchange()).with(DirectRouting);
     }
 }

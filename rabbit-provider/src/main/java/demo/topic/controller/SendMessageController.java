@@ -5,6 +5,7 @@ import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -19,7 +20,8 @@ import static demo.topic.constant.RabbitmqConstant.TopicExchange;
  * @author Ricardo.M.Lu
  */
 @Slf4j
-@RestController
+@RestController("topicSendMessageController")
+@RequestMapping("/topic")
 public class SendMessageController {
 
     @Autowired
