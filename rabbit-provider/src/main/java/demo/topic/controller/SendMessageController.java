@@ -1,7 +1,6 @@
 package demo.topic.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static demo.topic.constant.RabbitmqConstant.FirstTopicRouting;
-import static demo.topic.constant.RabbitmqConstant.TopicExchange;
+import static demo.topic.constant.RabbitmqConstant.*;
+
 /**
  * @author Ricardo.M.Lu
  */
@@ -32,11 +31,12 @@ public class SendMessageController {
         String messageId = String.valueOf(UUID.randomUUID());
         String messageData = "this is my first topic message!";
         String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        Map<String, Object> manMap = new HashMap<>();
-        manMap.put("messageId", messageId);
-        manMap.put("messageData", messageData);
-        manMap.put("createTime", createTime);
-        rabbitTemplate.convertAndSend(TopicExchange,FirstTopicRouting, manMap);
+        Map<String, Object> map = new HashMap<>();
+        map.put("messageId", messageId);
+        map.put("messageData", messageData);
+        map.put("createTime", createTime);
+        rabbitTemplate.convertAndSend(TopicExchange,FirstTopicRouting, map);
+        log.info("生产者发送消息: {}到了" + TopicExchange + "交换机", map.toString());
         return "ok";
     }
 
@@ -45,11 +45,12 @@ public class SendMessageController {
         String messageId = UUID.randomUUID().toString();
         String messageData = "this is my second topic message!";
         String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern( "yyyy-MM-dd HH:mm:ss"));
-        Map<String,Object> mapMap = new HashMap<>();
-        mapMap.put("messageId", messageId);
-        mapMap.put("messageData", messageData);
-        mapMap.put("createTime", createTime);
-        rabbitTemplate.convertAndSend(TopicExchange,FirstTopicRouting, mapMap);
+        Map<String,Object> map = new HashMap<>();
+        map.put("messageId", messageId);
+        map.put("messageData", messageData);
+        map.put("createTime", createTime);
+        rabbitTemplate.convertAndSend(TopicExchange,SecondTopicRouting, map);
+        log.info("生产者发送消息: {}到了" + TopicExchange + "交换机", map.toString());
         return "ok";
     }
 
