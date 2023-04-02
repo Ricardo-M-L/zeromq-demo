@@ -40,5 +40,4 @@ public class SendMessageController {
         log.info("生产者发送消息: {}到了" + FanoutExchange + "交换机", map.toString());
         return "ok";
     }
-
 }
