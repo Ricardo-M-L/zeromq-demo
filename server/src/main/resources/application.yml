@@ -1,0 +1,14 @@
+server:
+  port: 8021
+spring:
+  #给项目来个名字
+  application:
+    name: server
+#配置zeromq
+zeromq:
+  #发送数据的客户端的地址
+  send-address: tcp://localhost:5555
+
+  #服务端口将监听所有可用的网络接口上的5555端口
+  receive-address: tcp://*:5555
+
