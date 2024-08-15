@@ -1,0 +1,14 @@
+server:
+  port: 8002
+spring:
+  #给项目来个名字
+  application:
+    name: sub
+#配置zeromq
+zeromq:
+  #连接发送数据的客户端的地址
+  receive-address: tcp://localhost:7777
+
+
+
+

@@ -1,0 +1,13 @@
+
+server:
+  port: 8001
+spring:
+  #给项目来个名字
+  application:
+    name: pub
+#配置zeromq
+zeromq:
+  #监听所有可用的网络接口上的7777端口
+  send-address: tcp://*:7777
+
+
